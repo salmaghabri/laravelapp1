@@ -25,28 +25,35 @@ class BlogController extends Controller
 
         return view('blogs.show', ['blog'=>$params]);
     }
-    public function store(Request $request) 
-    {
-        $blog = new Blog();
-        $blog->title = $request->title;
-        $blog->content = $request->content;
-        $blog->save();
-    
-        return redirect('blogs');
-    }
-    public function edit($id) // --- (1)
-    {
-        $blog = Blog::find($id); // --- (2)
-        return view('blogs.edit', compact('blog')); // --- (3)
-    }
-    
-    public function update(Request $request, $id) // --- (4)
-    {
-        $blog = Blog::find($id); // --- (5)
-        $blog->title = $request->title;
-        $blog->content = $request->content;
-        $blog->save(); // --- (6)
+    public function store(Request $request, Blog $blog)
+{
+    $blog->fill($request->all());
+    $blog->save();
 
-        return redirect("blogs/$id");
+    return redirect()->route('blogs.index')->with('notice', 'I created a blog!'); 
+}
+    public function edit($id)  
+    {
+        $blog = Blog::find($id);  
+        return view('blogs.edit', compact('blog'));  
+    }
+    
+    public function update(Request $request, $id)  
+    {
+        $blog = Blog::find($id);  
+        $blog->title = $request->title;
+        $blog->content = $request->content;
+        $blog->save();  
+
+        return redirect()->route('blogs.show', $blog);
+    }
+    public function delete(Blog $blog){
+       
+        return view('blogs.delete', compact('blog'));
+    }
+    public function destroy(Blog $blog){
+        $blog->delete();
+        return redirect()->route('blogs.index');
+
     }
 }

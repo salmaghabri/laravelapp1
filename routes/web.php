@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,12 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/blogs', [\App\Http\Controllers\BlogController::class, 'index']); // 追加
-Route::get('/blogs/create', [\App\Http\Controllers\BlogController::class, 'create']); // 追記
-Route::post('/blogs', [\App\Http\Controllers\BlogController::class, 'store']); 
-Route::get('blogs/{article}', [\App\Http\Controllers\BlogController::class, 'show']); // 追記
-Route::get('blogs/{blog}/edit', [\App\Http\Controllers\BlogController::class, 'edit']); // 追加
-Route::put('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'update']); // 追加
+// Route::get('/blogs', [\App\Http\Controllers\BlogController::class, 'index']); 
+// Route::get('/blogs/create', [\App\Http\Controllers\BlogController::class, 'create']); 
+// Route::post('/blogs', [\App\Http\Controllers\BlogController::class, 'store']); 
+// Route::get('blogs/{article}', [\App\Http\Controllers\BlogController::class, 'show']); 
+// Route::get('blogs/{blog}/edit', [\App\Http\Controllers\BlogController::class, 'edit']); 
+// Route::put('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'update']); 
+// Route::get('blogs/{blog}/delete', [\App\Http\Controllers\BlogController::class, 'delete']); 
+// Route::delete('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'destroy']); 
+Route::resource('blogs', BlogController::class);
+Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete'); // 変更
 
 Route::get('/', function () {
     return view('welcome');

@@ -7,14 +7,11 @@
     <title>show blog</title>
 </head>
 <body>
-<p>
-            <strong>Title:</strong>
-            {{ $blog['title'] }} 
-        </p>
-        <p>
-        <strong>Content:</strong>
-        {{$blog['content']}}
-        </p>
-        <p><a href="/blogs">Back</a></p>
+<x-blog :blog="$blog"></x-blog>
+        <p><a href="/blogs">Back</a>
+        <a href="{{ url('/blogs/$blog->id/edit') }}">Edit</a> 
+        <a href="{{ url('/blogs/$blog->id/edit') }}">Edit</a>
+    </p>
+
 </body>
 </html>
