@@ -15,15 +15,11 @@ class BlogController extends Controller
         return view('blogs.index', compact('blogs')); 
     }
     public function show($id){
-        $b=Blog::find($id);
-        $params=[
-            'id'=>$b->id,
-            'title'=>$b->title,
-            'content'=>$b->content,
-        ];
+        $blog=Blog::find($id);
+       
 
 
-        return view('blogs.show', ['blog'=>$params]);
+        return view('blogs.show', compact('blog'));
     }
     public function store(Request $request, Blog $blog)
 {
@@ -41,9 +37,11 @@ class BlogController extends Controller
     public function update(Request $request, $id)  
     {
         $blog = Blog::find($id);  
+       // dd($id);
         $blog->title = $request->title;
         $blog->content = $request->content;
         $blog->save();  
+       // return redirect("blogs/$id");
 
         return redirect()->route('blogs.show', $blog);
     }
