@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {   public function create() 
     {
-        return view('blogs.create');
+        $users=User::all();
+
+    
+        return view('blogs.create',compact('users'));
     }
     public function index()
     {
@@ -16,9 +20,6 @@ class BlogController extends Controller
     }
     public function show($id){
         $blog=Blog::find($id);
-       
-
-
         return view('blogs.show', compact('blog'));
     }
     public function store(Request $request, Blog $blog)
@@ -31,25 +32,28 @@ class BlogController extends Controller
     public function edit($id)  
     {
         $blog = Blog::find($id);  
-        return view('blogs.edit', compact('blog'));  
+        $users=User::all();
+        return view('blogs.edit', compact('blog','users'));  
     }
     
     public function update(Request $request, $id)  
     {
         $blog = Blog::find($id);  
+        $users=User::all();
        // dd($id);
         $blog->title = $request->title;
         $blog->content = $request->content;
         $blog->save();  
        // return redirect("blogs/$id");
 
-        return redirect()->route('blogs.show', $blog);
+        return redirect()->route('blogs.show',compact('blog','users'));
     }
     public function delete(Blog $blog){
        
         return view('blogs.delete', compact('blog'));
     }
     public function destroy(Blog $blog){
+        
         $blog->delete();
         return redirect()->route('blogs.index');
 

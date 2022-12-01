@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('blogs/{blog}/delete', [\App\Http\Controllers\BlogController::class, 'delete']); 
 // Route::delete('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'destroy']); 
 Route::resource('blogs', BlogController::class);
-Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete'); // 変更
+Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete'); 
+
+
+
+
+Route::resource('users',UserController::class);
+Route::get('users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
 
 Route::get('/', function () {
     return view('welcome');

@@ -1,4 +1,4 @@
-<x-layout> 
+<x-layout > 
     <h1>Blogs</h1>
     @if (session('notice'))
         <div>
@@ -10,6 +10,7 @@
         <tr>
             <th>Title</th>
             <th>Content</th>
+            <th>added by</th>
             <th colspan="3"></th>
         </tr>
         </thead>
