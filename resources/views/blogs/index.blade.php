@@ -1,23 +1,16 @@
 <x-layout > 
-    <h1>Blogs</h1>
+    <h1>Blogs <a class="btn btn-dark" href="{{ route('blogs.create') }}">New Blog</a></h1>
     @if (session('notice'))
-        <div>
+        <div class="alert alert-success">
             {{ session('notice') }}
         </div>
     @endif
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Content</th>
-            <th>added by</th>
-            <th colspan="3"></th>
-        </tr>
-        </thead>
+ 
         @foreach($blogs as $blog)
             <x-blogTableRaw :blog="$blog"></x-blogTableRaw>
         @endforeach
-    </table>
+  
+    
     <br>
-    <a href="{{ route('blogs.create') }}">New Blog</a>
+    
 </x-layout> 

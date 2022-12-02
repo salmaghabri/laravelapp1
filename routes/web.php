@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,14 +22,13 @@ use Illuminate\Support\Facades\Route;
 // Route::put('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'update']); 
 // Route::get('blogs/{blog}/delete', [\App\Http\Controllers\BlogController::class, 'delete']); 
 // Route::delete('blogs/{blog}', [\App\Http\Controllers\BlogController::class, 'destroy']); 
-Route::resource('blogs', BlogController::class);
-Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete'); 
-
-
-
-
+Route::resource('blogs', BlogController::class,);
 Route::resource('users',UserController::class);
+Route::get('blogs/{blog}/delete', [BlogController::class, 'delete'])->name('blogs.delete'); 
 Route::get('users/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+
+//Route :: resource('comments',CommentController::class);
+Route::post('blogs/{blog}', [\App\Http\Controllers\CommentController::class, 'store']); 
 
 Route::get('/', function () {
     return view('welcome');

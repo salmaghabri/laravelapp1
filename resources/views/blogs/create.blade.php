@@ -4,7 +4,7 @@
         @csrf 
         <p><label>Title:<input type="text" name="title" size="30"/></label></p>
 
-        <p><label>Content:<textarea name="content" cols="32" rows="8"></textarea></label></p>
+        <p><label>Content:<textarea name="content"  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></label></p>
         <p><label > added by</label>
             <select name="user_id" >
                 @foreach( $users as $user)

@@ -13,7 +13,10 @@ class User extends Model
         'age',
         'bio'
     ];
-    public function blog(){
+    public function blogs(){
         return $this->hasMany(Blog::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 }

@@ -9,25 +9,24 @@ class BlogController extends Controller
 {   public function create() 
     {
         $users=User::all();
-
-    
         return view('blogs.create',compact('users'));
     }
     public function index()
     {
         $blogs = Blog::all(); 
+        
         return view('blogs.index', compact('blogs')); 
     }
     public function show($id){
         $blog=Blog::find($id);
-        return view('blogs.show', compact('blog'));
+        $users=User::all();
+        return view('blogs.show', compact('blog','users'));
     }
-    public function store(Request $request, Blog $blog)
-{
+    public function store(Request $request, Blog $blog){
     $blog->fill($request->all());
     $blog->save();
 
-    return redirect()->route('blogs.index')->with('notice', 'I created a blog!'); 
+    return redirect()->route('blogs.index')->with('notice', User::find($request->user_id)->username .' created a blog!'); 
 }
     public function edit($id)  
     {
@@ -55,7 +54,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog){
         
         $blog->delete();
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('notice','blog deleted sucessfully !');
 
     }
 }

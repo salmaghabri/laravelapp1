@@ -6,6 +6,7 @@
         <title>Blog App</title>
     </head>
     <body>
+
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd;">
   <a class="navbar-brand" href="#">BLOGIN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,17 +18,19 @@
         <a class="nav-link" href="#">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
+        <a class="nav-link" href="{{route('users.index')}}">Users</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Blogs</a>
+        <a class="nav-link" href="{{route('blogs.index')}}">Blogs</a>
       </li>
       
     </ul>
   </div>
 </nav>
+<div class="container">
+
 
        {{ $slot }}
-
+</div>
     </body>
 </html>
